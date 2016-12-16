@@ -1,0 +1,3 @@
+#!/bin/bash
+nohup mvn clean install &
+tail -f nohup.out | grep --color -E 'Running the test method|On test failure|On test success|On test skipped|$'
