@@ -1,0 +1,10 @@
+#!/bin/bash
+cd repository/deployment/server/jaggeryapps
+mv publisher publisher_old
+mv store store_old
+mv admin admin_old
+ln -s /home/malintha/wso2apim/gitworkspace/carbon-apimgt-rest-my/features/apimgt/org.wso2.carbon.apimgt.store.feature/src/main/resources/store store
+ln -s /home/malintha/wso2apim/gitworkspace/carbon-apimgt-rest-my/features/apimgt/org.wso2.carbon.apimgt.publisher.feature/src/main/resources/publisher publisher
+ln -s /home/malintha/wso2apim/gitworkspace/carbon-apimgt-rest-my/features/apimgt/org.wso2.carbon.apimgt.store.feature/src/main/resources/admin admin
+ls --color
+cd -

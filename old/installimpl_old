@@ -1,0 +1,13 @@
+#!/bin/bash
+# My first script
+
+PACK_HOME=~/wso2apim/cur/sso/wso2am-1.9.0-SNAPSHOT
+
+mkdir -p $PACK_HOME/repository/components/patches/patch0011
+
+echo "Copying target jar to distribution"
+
+cp carbon-apimgt/components/apimgt/org.wso2.carbon.apimgt.impl/target/org.wso2.carbon.apimgt.impl-1.2.4-SNAPSHOT.jar $PACK_HOME/repository/components/patches/patch0011/org.wso2.carbon.apimgt.impl_1.2.4_SNAPSHOT.jar
+
+echo "Finish"
+

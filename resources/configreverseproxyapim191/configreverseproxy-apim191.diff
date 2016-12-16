@@ -1,0 +1,47 @@
+diff --git a/repository/conf/carbon.xml b/repository/conf/carbon.xml
+index 5f3b4b0..3a6dc13 100644
+--- a/repository/conf/carbon.xml
++++ b/repository/conf/carbon.xml
+@@ -42,7 +42,7 @@
+        This is will become part of the End Point Reference of the
+        services deployed on this server instance.
+     -->
+-    <!--HostName>www.wso2.org</HostName-->
++    <HostName>localhost</HostName>
+ 
+     <!--
+     Host name to be used for the Carbon management console
+diff --git a/repository/deployment/server/jaggeryapps/publisher/site/conf/site.json b/repository/deployment/server/jaggeryapps/publisher/site/conf/site.json
+index e4935b5..66582ee 100644
+--- a/repository/deployment/server/jaggeryapps/publisher/site/conf/site.json
++++ b/repository/deployment/server/jaggeryapps/publisher/site/conf/site.json
+@@ -36,9 +36,9 @@
+     },
+ 
+     "reverseProxy" : {
+-        "enabled" : false,    // values true , false , "auto" - will look for  X-Forwarded-* headers
+-        "host" : "sample.proxydomain.com", // If reverse proxy do not have a domain name use IP
+-        "context":"",
++        "enabled" : true,    // values true , false , "auto" - will look for  X-Forwarded-* headers
++        "host" : "localhost", // If reverse proxy do not have a domain name use IP
++        "context":"/apimanager/publisher",
+       //"regContext":"" // Use only if different path is used for registry
+     },
+ }
+diff --git a/repository/deployment/server/jaggeryapps/store/site/conf/site.json b/repository/deployment/server/jaggeryapps/store/site/conf/site.json
+index 15f971c..8d1b10a 100644
+--- a/repository/deployment/server/jaggeryapps/store/site/conf/site.json
++++ b/repository/deployment/server/jaggeryapps/store/site/conf/site.json
+@@ -48,9 +48,9 @@
+ 
+ 
+     "reverseProxy" : {
+-        "enabled" : false,    // values true , false , "auto" - will look for  X-Forwarded-* headers
+-        "host" : "sample.proxydomain.com", // If reverse proxy do not have a domain name use IP
+-        "context":"",
++        "enabled" : "auto",    // values true , false , "auto" - will look for  X-Forwarded-* headers
++        "host" : "localhost", // If reverse proxy do not have a domain name use IP
++        "context":"/apimanager/store",
+       //"regContext":"" // Use only if different path is used for registry
+     },
+   "mapExistingAuthApps" : false

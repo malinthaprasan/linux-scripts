@@ -1,0 +1,21 @@
+#!/bin/bash
+# My first script
+
+APIM_HOME=.
+APIM_PATCHDIR=$APIM_HOME/repository/components/patches
+pathResources=~/wso2apim/scripts/resources
+patch=$pathResources/temp/patches/$1
+
+if [[ $1 = "" ]] 
+then
+    echo "Please input patch dir."
+    echo "Ex:"
+    echo "installpatches patch0050"
+else
+    mkdir -p $APIM_PATCHDIR
+    echo "Copying target $patch to $APIM_PATCHDIR"
+    cp -r $patch $APIM_PATCHDIR
+    echo "Finish"
+    echo "Listing patch dir $APIM_PATCHDIR/$1"
+    ls $APIM_PATCHDIR/$1 --color
+fi

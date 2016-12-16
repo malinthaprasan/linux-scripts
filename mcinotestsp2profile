@@ -1,0 +1,2 @@
+#!/bin/bash
+mvn clean install -rf :am-p2-profile -Dmaven.test.skip=true

@@ -1,0 +1,35 @@
+#!/bin/bash
+# My first script
+
+
+GIT_HOME=~/wso2apim/gitworkspace
+PACKHOME=.
+PATCHDIR=$PACKHOME/repository/components/patches/patch0050
+COMPONENT_GROUP=org.wso2.carbon.apimgt
+
+echo "creating patch folder"
+mkdir -p $PATCHDIR
+
+echo "Copying target jars to distribution"
+
+COMPONENTS=(keymgt keymgt.client hostobjects impl api gateway startup.publisher interceptor core)
+FROM_VERSION=1.2.5-SNAPSHOT
+TO_VERSION=1.2.5-SNAPSHOT
+
+for COMP in ${COMPONENTS[*]}
+do
+    echo "copying $COMP"
+    cp $GIT_HOME/carbon-apimgt/components/apimgt/$COMPONENT_GROUP.$COMP/target/$COMPONENT_GROUP.$COMP-$FROM_VERSION.jar $PATCHDIR/$COMPONENT_GROUP.$COMP'_'$TO_VERSION.jar
+done
+
+COMPONENT_GROUP_MINOR=usage
+COMPONENTS=(client publisher)
+for COMP in ${COMPONENTS[*]}
+do
+    echo "copying $COMP"
+    cp $GIT_HOME/carbon-apimgt/components/apimgt/$COMPONENT_GROUP.$COMPONENT_GROUP_MINOR/$COMPONENT_GROUP.$COMPONENT_GROUP_MINOR.$COMP/target/$COMPONENT_GROUP.$COMPONENT_GROUP_MINOR.$COMP-$FROM_VERSION.jar $PATCHDIR/$COMPONENT_GROUP.$COMPONENT_GROUP_MINOR.$COMP'_'$TO_VERSION.jar
+done
+
+echo "Finish"
+echo "listing $PATCHDIR"
+ls $PATCHDIR

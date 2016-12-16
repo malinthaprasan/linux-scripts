@@ -1,0 +1,20 @@
+#!/bin/bash
+# config sso script apimanager
+
+pathResources=~/wso2apim/scripts/resources
+pathSSODiff=$pathResources/configssoapim191
+
+curPath=${PWD}
+echo 'current path is' $curPath 
+echo 'diff location is' $pathSSODiff
+
+echo 'applying reg,db configs'
+git apply $pathSSODiff/ssoenable-apim191-reg-db.diff
+
+echo 'applying site.json diffs'
+git apply $pathSSODiff/ssoenable-apim191-site.diff
+
+echo 'copying mysql connector jar'
+cp -r $pathSSODiff/repository .
+
+

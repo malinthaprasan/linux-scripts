@@ -1,0 +1,15 @@
+#!/bin/bash
+
+curl -X POST -c cookies http://localhost:9763/store/site/blocks/user/login/ajax/login.jag -d 'action=login&username=admin&password=admin'
+
+APPNAME=facebook
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/application/application-add/ajax/application-add.jag -d "action=addApplication&application=$APPNAME&tier=Unlimited&description=&callbackUrl="
+
+APPNAME=gmaps
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/application/application-add/ajax/application-add.jag -d "action=addApplication&application=$APPNAME&tier=Unlimited&description=&callbackUrl="
+
+APPNAME=youtube
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/application/application-add/ajax/application-add.jag -d "action=addApplication&application=$APPNAME&tier=Unlimited&description=&callbackUrl="
+
+APPNAME=google
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/application/application-add/ajax/application-add.jag -d "action=addApplication&application=$APPNAME&tier=Unlimited&description=&callbackUrl="

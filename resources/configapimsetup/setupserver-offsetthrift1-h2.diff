@@ -1,0 +1,54 @@
+diff --git a/repository/conf/api-manager.xml b/repository/conf/api-manager.xml
+index dfc71a7..a52ac15 100755
+--- a/repository/conf/api-manager.xml
++++ b/repository/conf/api-manager.xml
+@@ -289,9 +289,9 @@
+         -->
+ 
+         <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
+-        <ThriftClientPort>10397</ThriftClientPort>
++        <ThriftClientPort>10398</ThriftClientPort>
+         <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
+-        <ThriftServerPort>10397</ThriftServerPort>
++        <ThriftServerPort>10398</ThriftServerPort>
+ 	<!--ThriftServerHost>localhost</ThriftServerHost-->
+ 	<EnableThriftServer>true</EnableThriftServer>
+ 
+diff --git a/repository/conf/carbon.xml b/repository/conf/carbon.xml
+index 3c347fe..9fcac2b 100644
+--- a/repository/conf/carbon.xml
++++ b/repository/conf/carbon.xml
+@@ -125,7 +125,7 @@
+          the define value + Offset.
+          e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
+          -->
+-        <Offset>0</Offset>
++        <Offset>1</Offset>
+ 
+         <!-- The JMX Ports -->
+         <JMX>
+@@ -627,11 +627,11 @@
+         name="trace" - Print additional trace information; for all servers
+         name="baseDir" - The base directory for H2 databases; for all servers  
+     -->
+-    <!--H2DatabaseConfiguration>
++    <H2DatabaseConfiguration>
+         <property name="web" />
+         <property name="webPort">8082</property>
+         <property name="webAllowOthers" />
+-        <property name="webSSL" />
++        <!--property name="webSSL" />
+         <property name="tcp" />
+         <property name="tcpPort">9092</property>
+         <property name="tcpAllowOthers" />
+@@ -640,8 +640,8 @@
+         <property name="pgPort">5435</property>
+         <property name="pgAllowOthers" />
+         <property name="trace" />
+-        <property name="baseDir">${carbon.home}</property>
+-    </H2DatabaseConfiguration-->
++        <property name="baseDir">${carbon.home}</property-->
++    </H2DatabaseConfiguration>
+     <!--Disabling statistics reporter by default-->
+     <StatisticsReporterDisabled>true</StatisticsReporterDisabled>
+ 

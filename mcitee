@@ -1,0 +1,10 @@
+#!/bin/bash
+if [[ $1 = "" ]] 
+then
+    echoh2 "Input file location for login to override the default name: buildlog.txt"
+    echoh3 "Ex:"
+    echoh3 "mcitee ../buildlogs/product-apimgt_1.10.x_1115.txt"
+    mvn clean install 2>&1 | tee buildlog.txt | grep --color -E 'Running the test method|On test failure|On test success|On test skipped|$'
+else
+    mvn clean install 2>&1 | tee $1 | grep --color -E 'Running the test method|On test failure|On test success|On test skipped|$'
+fi

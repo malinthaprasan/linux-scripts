@@ -1,0 +1,39 @@
+#!/bin/bash
+
+compLocation=components/apimgt
+compPrefix=org.wso2.carbon.apimgt
+components=( api impl hostobjects keymgt keymgt.client gateway )
+cd $compLocation
+for i in "${components[@]}"
+do
+    cd $compPrefix"."$i
+    pwd
+    mcinotests-patch $1 $2
+    cd ..
+done
+
+compPrefix=org.wso2.carbon.apimgt.usage
+cd $compPrefix
+pwd
+
+components=( publisher client  )
+for i in "${components[@]}"
+do
+    cd $compPrefix"."$i
+    pwd
+    mcinotests-patch $1 $2
+    cd ..
+done
+
+cd ..  # goes back to components/apimgt
+pwd
+
+compPrefix=org.wso2.carbon.apimgt
+components=( core interceptor startup.publisher )
+for i in "${components[@]}"
+do
+    cd $compPrefix"."$i
+    pwd
+    mcinotests-patch $1 $2
+    cd ..
+done

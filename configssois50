@@ -1,0 +1,17 @@
+#!/bin/bash
+# config sso script apimanager
+
+pathResources=~/wso2apim/scripts/resources
+pathSSODiff=$pathResources/configssois50
+
+curPath=${PWD}
+echo 'current path is' $curPath 
+echo 'diff location is' $pathSSODiff
+
+echo 'applying configs'
+git apply $pathSSODiff/ssotemplate-is.diff
+
+echo 'copying mysql connector jar'
+cp -r $pathSSODiff/repository .
+
+

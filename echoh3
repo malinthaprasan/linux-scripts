@@ -1,0 +1,4 @@
+#!/bin/bash
+source globals
+
+echo -e "$echo_prefix "$1

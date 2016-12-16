@@ -1,0 +1,7 @@
+#!/bin/bash
+# My first script
+
+APIM_HOME=.
+PATCHDIR=$APIM_HOME/repository/components/patches/patch0050
+echo "Location:"$PATCHDIR
+ls $PATCHDIR --color

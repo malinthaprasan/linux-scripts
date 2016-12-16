@@ -1,0 +1,10 @@
+#!/bin/bash
+echo
+echo "PATH      = "$PATH
+echo 
+echo "JAVA_HOME = "$JAVA_HOME
+echo "JRE_HOME  = "$JRE_HOME
+echo
+java -version
+echo
+mvn -version

@@ -1,0 +1,2 @@
+#!/bin/bash
+mvn clean install --offline -Dmaven.test.skip=true

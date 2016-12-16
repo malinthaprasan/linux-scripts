@@ -1,0 +1,45 @@
+#!/bin/bash
+
+curl -X POST -c cookies http://localhost:9763/publisher/site/blocks/user/login/ajax/login.jag -d 'action=login&username=admin&password=admin'
+
+API_NAME=admingeo
+API_VERSION=1.0.0
+ENDPOINT="http://maps.googleapis.com/maps/api/geocode/json?address=Chicago"
+TIERS=Gold,Bronze
+
+curl -X POST -b cookies http://localhost:9763/publisher/site/blocks/item-add/ajax/add.jag -d "action=addAPI&name=$API_NAME&context=/$API_NAME&version=$API_VERSION&visibility=public&thumbUrl=&endpointType=nonsecured&tiersCollection=$TIERS&http_checked=http&https_checked=https&resourceCount=0&resourceMethod-0=GET&resourceMethodAuthType-0=Application&resourceMethodThrottlingTier-0=Unlimited&uriTemplate-0=/*" -d\'endpoint_config={"production_endpoints":{"url":$ENDPOINT,"config":null},"endpoint_type":"http"}\';
+
+
+API_NAME=admingeo
+API_VERSION=2.0.0
+ENDPOINT="http://maps.googleapis.com/maps/api/geocode/json?address=Chicago"
+TIERS=Bronze
+
+
+
+API_NAME=adminruby
+API_VERSION=1.0.0
+ENDPOINT="http://rubygems.org/api/v1/gems/rails.json"
+TIERS=Unlimited
+
+curl -X POST -b cookies http://localhost:9763/publisher/site/blocks/item-add/ajax/add.jag -d "action=addAPI&name=$API_NAME&context=/$API_NAME&version=$API_VERSION&visibility=public&thumbUrl=&endpointType=nonsecured&tiersCollection=$TIERS&http_checked=http&https_checked=https&resourceCount=0&resourceMethod-0=GET&resourceMethodAuthType-0=Application&resourceMethodThrottlingTier-0=Unlimited&uriTemplate-0=/*" -d\'endpoint_config={"production_endpoints":{"url":$ENDPOINT,"config":null},"endpoint_type":"http"}\';
+
+API_NAME=adminsales
+API_VERSION=1.0.0
+ENDPOINT="http://na14.salesforce.com/services/data/"
+TIERS=Bronze
+
+curl -X POST -b cookies http://localhost:9763/publisher/site/blocks/item-add/ajax/add.jag -d "action=addAPI&name=$API_NAME&context=/$API_NAME&version=$API_VERSION&visibility=public&thumbUrl=&endpointType=nonsecured&tiersCollection=$TIERS&http_checked=http&https_checked=https&resourceCount=0&resourceMethod-0=GET&resourceMethodAuthType-0=Application&resourceMethodThrottlingTier-0=Unlimited&uriTemplate-0=/*" -d\'endpoint_config={"production_endpoints":{"url":$ENDPOINT,"config":null},"endpoint_type":"http"}\';
+
+API_NAME=adminshopping
+API_VERSION=1.0.0
+ENDPOINT="http://sandbox.api.shopping.com/publisher/3.0/rest/CategoryTree"
+TIERS=Gold
+
+curl -X POST -b cookies http://localhost:9763/publisher/site/blocks/item-add/ajax/add.jag -d "action=addAPI&name=$API_NAME&context=/$API_NAME&version=$API_VERSION&visibility=public&thumbUrl=&endpointType=nonsecured&tiersCollection=$TIERS&http_checked=http&https_checked=https&resourceCount=0&resourceMethod-0=GET&resourceMethodAuthType-0=Application&resourceMethodThrottlingTier-0=Unlimited&uriTemplate-0=/*" -d\'endpoint_config={"production_endpoints":{"url":$ENDPOINT,"config":null},"endpoint_type":"http"}\';
+
+
+
+
+
+

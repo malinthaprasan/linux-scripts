@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source apimlib
+
+loginStore 'admin' 'admin'
+
+for i in {30..70}
+do
+    #deleteApp 'app'$i
+    createApp 'app'$i
+done
+
+

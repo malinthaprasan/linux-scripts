@@ -1,0 +1,4 @@
+#!/bin/bash
+#usage 
+#. mvnmojodebug
+export MAVEN_OPTS=$MAVEN_OPTS" -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y"

@@ -1,0 +1,2 @@
+#!/bin/bash
+mvn clean install | grep --color -E 'Running the test method|On test failure|On test success|On test skipped|$'

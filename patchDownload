@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p downloaded 
+
+for patchName in "$@"
+do
+    patchNumber=${patchName//"patch"/""}
+    curl https://svn.wso2.com/wso2/custom/projects/projects/carbon/wilkes/patches/$patchName/WSO2-CARBON-PATCH-4.4.0-$patchNumber.zip -H "Authorization:Basic ACCESSTOKEN" > downloaded/WSO2-CARBON-PATCH-4.4.0-$patchNumber.zip
+done

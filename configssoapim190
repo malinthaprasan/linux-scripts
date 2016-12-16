@@ -1,0 +1,20 @@
+#!/bin/bash
+# config sso script apimanager
+
+pathAllDiffs=~/wso2apim/tempos
+pathSSODiff=$pathAllDiffs/sso-template/apim
+
+curPath=${PWD}
+echo 'current path is' $curPath 
+echo 'diff location is' $pathSSODiff
+
+echo 'applying reg,db configs'
+git apply $pathSSODiff/ssoenable-apim-reg-db.diff
+
+echo 'applying site.json diffs'
+git apply $pathSSODiff/ssoenable-apim-site.diff
+
+echo 'copying mysql connector jar'
+cp -r $pathSSODiff/repository .
+
+

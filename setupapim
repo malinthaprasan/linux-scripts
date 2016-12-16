@@ -1,0 +1,25 @@
+#!/bin/bash
+# config sso script apimanager
+
+pathAllDiffs=~/wso2apim/scripts/resources
+pathDiff=$pathAllDiffs/configapimsetup
+
+curPath=${PWD}
+echoh3 'current path is '$curPath  
+echoh3 'diff location is '$pathDiff
+
+echoh3 'applying diff'
+git apply $pathDiff/h2-set.diff
+
+
+cd repository/deployment/server/jaggeryapps
+mv publisher publisher_old
+mv store store_old
+mv admin-dashboard admin-dashboard_old
+ln -s /home/malintha/wso2apim/gitworkspace/carbon-apimgt-rest-my/features/apimgt/org.wso2.carbon.apimgt.store.feature/src/main/resources/store store
+ln -s /home/malintha/wso2apim/gitworkspace/carbon-apimgt-rest-my/features/apimgt/org.wso2.carbon.apimgt.store.feature/src/main/resources/admin-dashboard admin-dashboard
+ln -s /home/malintha/wso2apim/gitworkspace/carbon-apimgt-rest-my/features/apimgt/org.wso2.carbon.apimgt.publisher.feature/src/main/resources/publisher publisher
+
+ls
+
+echoh1 'END'

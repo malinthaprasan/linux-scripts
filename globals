@@ -1,0 +1,6 @@
+#!/bin/bash
+
+start_GRN="\e[32m"
+stop="\e[39m"
+
+export echo_prefix="$start_GRN[MY-SCRIPT]$stop"

@@ -1,0 +1,3 @@
+#!/bin/bash
+echoh1 'mcinotests-patch patch0050 ~/wso2apim/cur/rest/wso2am-1.10.1-SNAPSHOT'
+mcinotests-patch patch0050 ~/wso2apim/cur/rest/wso2am-1.10.1-SNAPSHOT

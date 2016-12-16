@@ -1,0 +1,151 @@
+#!/bin/bash
+
+echo "--- Including APIM API library ---"
+
+#1 USERNAME admin
+#2 PASSWORD admin
+function loginPublisher() {
+	echo -e "\e[32m[Login to Publisher]"
+	echo -e "\e[0musename=$1,password=$2"
+	PROVIDER=$1
+	logincmd="curl -X POST -c cookies http://localhost:9763/publisher/site/blocks/user/login/ajax/login.jag -d \"action=login&username=$1&password=$2\""
+	echo "	[executing] $logincmd"
+	eval $logincmd
+	echo
+	echo
+}
+
+
+#1 USERNAME admin
+#2 PASSWORD admin
+function loginStore() {
+	echo "[Login to Store]"
+	echo "usename=$1,password=$2"
+	SUBSCRIBER=$1
+	curl -X POST -c cookies http://localhost:9763/store/site/blocks/user/login/ajax/login.jag -d "action=login&username=$1&password=$2"
+	echo
+	echo
+}
+
+
+#1 API NAME testapi
+#2 API VERSION 1.0.0
+#3 TIERS Gold,Bronze
+#4 ENDPOINT http://maps.googleapis.com/maps/api/geocode/json?address=Chicago
+#5 PROVIDER admin
+function createAPI(){
+	echo "[Adding API]"
+	echo "apiname=$1,apiversion=$2,tiers=$3,endpoint=$4,provider=$5"
+	createcmd="curl -X POST -b cookies http://localhost:9763/publisher/site/blocks/item-add/ajax/add.jag -d 'action=addAPI&name=$1&context=/$1&version=$2&visibility=public&thumbUrl=&endpointType=nonsecured&tiersCollection=$3&http_checked=http&https_checked=https&resourceCount=0&resourceMethod-0=GET&resourceMethodAuthType-0=Application&resourceMethodThrottlingTier-0=Unlimited&uriTemplate-0=/*' -d 'endpoint_config={\"production_endpoints\":{\"url\":\"$4\",\"config\":null},\"endpoint_type\":\"http\"}'"
+	echo "	[executing] $createcmd"
+	eval $createcmd
+	echo
+	publishcmd="curl -X POST -b cookies \"http://localhost:9763/publisher/site/blocks/life-cycles/ajax/life-cycles.jag\" -d 'action=updateStatus&name=$1&version=$2&provider=$5&status=PUBLISHED&publishToGateway=true&requireResubscription=true'"
+	echo "	[executing] $publishcmd"
+	eval $publishcmd
+	echo
+	echo
+}
+
+
+#1 APPLICATION NAME facebook
+function createApp() {
+	echo "[Creating App]"
+	echo "appname=$1"
+	curl -X POST -b cookies http://localhost:9763/store/site/blocks/application/application-add/ajax/application-add.jag -d "action=addApplication&application=$1&tier=Unlimited&description=&callbackUrl="
+	echo
+	echo "[Generating App Key]"
+	curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=generateApplicationKey&application=$1&keytype=PRODUCTION&callbackUrl=&authorizedDomains=ALL&validityTime=3600000"
+	echo
+	echo
+}
+
+#1 APPLICATION NAME facebook
+function deleteApp() {
+	echo "[Deleting App]"
+	echo "appname=$1"
+    curl -X POST -b cookies http://localhost:9763/store/site/blocks/application/application-remove/ajax/application-remove.jag -d "action=removeApplication&application=$1"
+	echo
+	echo
+}
+
+
+#1 API NAME 
+#2 API VERSION
+#3 APPNAME
+#4 PROVIDER
+function subscribeAPI () {
+	echo "[Subscibing API]"
+	echo "	[params]apiname=$1,apiversion=$2,appname=$3,provider=$4"
+	cmd="curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d \"action=addAPISubscription&name=$1&version=$2&provider=$4&tier=Unlimited&applicationName=$3\""
+	echo "	[executing] $cmd"
+	eval $cmd
+	echo
+	echo
+}
+
+
+#1 API NAME 
+#2 API VERSION
+#3 APPNAME
+#4 COUNT
+#5 MODE empty or "/t/ten1/"
+function invokeAPI() {
+	echo "[Invoking API]"
+	echo "  [params] apiname=$1,apiversion=$2,appname=$3,count=$4,ten=$5"
+	subscript=$(curl -s -b cookies "http://localhost:9763/store/site/blocks/subscription/subscription-list/ajax/subscription-list.jag?action=getAllSubscriptions&selectedApp=$3")
+	echo $subscript
+	index=0
+	name=$(echo $subscript | jq ".subscriptions.applications[$index].name" | tr -d '"')
+	while [ "$name" != "$3" ]
+	do
+		index=$(( $index+1 ))
+		name=$(echo $subscript | jq ".subscriptions.applications[$index].name" | tr -d '"')
+        if [[ "$index" == 50 ]]; then
+            echo "  [ERROR] cannot find subscription key"
+            break
+        fi
+	done
+	
+	key=$(echo $subscript | jq ".subscriptions.applications[$index].prodKey" | tr -d '"')
+	echo "  [key] $key"
+	echo "  [executing] curl -H \"Authorization :Bearer $key\" http://localhost:8280$5/$1/$2"
+	for i in $(seq 1 1 $4)
+	do
+		curl -H "Authorization :Bearer $key" "http://localhost:8280$5/$1/$2"
+		echo
+	done
+	echo
+}
+
+
+#1 API NAME 
+#2 API VERSION
+#3 APPNAME
+#4 COUNT
+#5 TENANT ten1
+function invokeAPITenant() {
+	invokeAPI $1 $2 $3 $4 /t/$5
+}
+
+#1 PROVIDER
+#2 API NAME 
+#3 API VERSION
+#4 NEW VERSION
+function createVersion() {
+	echo "[Create New API Version]"
+	echo "	[params] apiname=$1,apiversion=$2,newversion=$3"
+	createcmd="curl -X POST -b cookies http://localhost:9763/publisher/site/blocks/overview/ajax/overview.jag -d \"action=createNewAPI&provider=$1&apiName=$2&version=$3&newVersion=$4&isDefaultVersion=\""
+	echo "	[executing] $createcmd"
+	eval $createcmd
+	echo
+	publishcmd="curl -X POST -b cookies \"http://localhost:9763/publisher/site/blocks/life-cycles/ajax/life-cycles.jag\" -d 'action=updateStatus&name=$2&version=$4&provider=$1&status=PUBLISHED&publishToGateway=true&requireResubscription=true'"
+	echo "	[executing] $publishcmd"
+	eval $publishcmd
+	echo
+	echo
+}
+
+# todo: $adding hostport variables, notnull check, curl command through variables, SUBSCRIBE TO UNLIMITED ??????? , SUBSCRIBE add tier
+
+

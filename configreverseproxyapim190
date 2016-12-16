@@ -1,0 +1,13 @@
+#!/bin/bash
+# config sso script apimanager
+
+pathResources=~/wso2apim/scripts/resources
+pathDiff=$pathResources/configreverseproxyapim190
+
+curPath=${PWD}
+echo 'current path is' $curPath 
+echo 'diff location is' $pathDiff
+
+echo 'applying reverse proxy changes for site.json and carbon.xml'
+git apply $pathDiff/reverseproxy-enable-apim.diff
+

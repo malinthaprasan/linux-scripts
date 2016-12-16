@@ -1,0 +1,5 @@
+#!/bin/bash
+source globals
+
+echoh3
+echoh3 "$1"

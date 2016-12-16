@@ -1,0 +1,23 @@
+#!/bin/bash
+# My first script
+
+APIM_HOME=.
+GIT_HOME=~/wso2apim/gitworkspace
+PATCHDIR=$APIM_HOME/repository/components/patches/patch0050
+GROUP=org.wso2.carbon.apimgt
+SUBGROUP=usage
+COMPONENT=client
+
+VERSION=1.2.5-SNAPSHOT
+
+mkdir -p $PATCHDIR
+
+echo "Copying target usage client jar to distribution"
+
+cp $GIT_HOME/carbon-apimgt/components/apimgt/$GROUP.$SUBGROUP/$GROUP.$SUBGROUP.$COMPONENT/target/$GROUP.$SUBGROUP.$COMPONENT'-'$VERSION.jar $PATCHDIR/$GROUP.$SUBGROUP.$COMPONENT'_'$VERSION.jar
+
+echo "Finish"
+
+echo "Listing patch dir"
+
+listpatchdir

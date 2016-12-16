@@ -1,0 +1,17 @@
+#!/bin/bash 
+# My first script
+
+APIM_HOME=.
+GIT_HOME=~/wso2apim/gitworkspace
+COMPONENT_GROUP=org.wso2.carbon.apimgt
+
+COMPONENTS=(keymgt keymgt.client hostobjects impl api gateway startup.publisher interceptor core)
+
+for COMP in ${COMPONENTS[*]}
+do
+    ls $MY_GIT_HOME/carbon-apimgt/components/apimgt/$COMPONENT_GROUP.$COMP/target | grep jar
+done
+
+ls $MY_GIT_HOME/carbon-apimgt/components/apimgt/$COMPONENT_GROUP.usage/$COMPONENT_GROUP.usage.client/target | grep jar
+ls $MY_GIT_HOME/carbon-apimgt/components/apimgt/$COMPONENT_GROUP.usage/$COMPONENT_GROUP.usage.publisher/target | grep jar
+

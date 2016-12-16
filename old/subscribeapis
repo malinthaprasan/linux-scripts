@@ -1,0 +1,65 @@
+#!/bin/bash
+
+curl -X POST -c cookies http://localhost:9763/store/site/blocks/user/login/ajax/login.jag -d 'action=login&username=admin&password=admin'
+
+API_NAME=admingeo
+API_VERSION=1.0.0
+PROVIDER=admin
+APPNAME=facebook
+
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=addAPISubscription&name=$API_NAME&version=$API_VERSION&provider=$PROVIDER&tier=Unlimited&applicationName=$APPNAME"
+
+
+
+API_NAME=admingeo
+API_VERSION=2.0.0
+PROVIDER=admin
+APPNAME=facebook
+
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=addAPISubscription&name=$API_NAME&version=$API_VERSION&provider=$PROVIDER&tier=Unlimited&applicationName=$APPNAME"
+
+
+
+API_NAME=adminruby
+API_VERSION=1.0.0
+PROVIDER=admin
+APPNAME=youtube
+
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=addAPISubscription&name=$API_NAME&version=$API_VERSION&provider=$PROVIDER&tier=Unlimited&applicationName=$APPNAME"
+
+
+
+API_NAME=adminshopping
+API_VERSION=1.0.0
+PROVIDER=admin
+APPNAME=gmaps
+
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=addAPISubscription&name=$API_NAME&version=$API_VERSION&provider=$PROVIDER&tier=Unlimited&applicationName=$APPNAME"
+
+
+API_NAME=adminsales
+API_VERSION=1.0.0
+PROVIDER=admin
+APPNAME=gmaps
+
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=addAPISubscription&name=$API_NAME&version=$API_VERSION&provider=$PROVIDER&tier=Unlimited&applicationName=$APPNAME"
+
+
+API_NAME=adminshopping
+API_VERSION=1.0.0
+PROVIDER=admin
+APPNAME=google
+
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=addAPISubscription&name=$API_NAME&version=$API_VERSION&provider=$PROVIDER&tier=Unlimited&applicationName=$APPNAME"
+
+
+API_NAME=adminsales
+API_VERSION=1.0.0
+PROVIDER=admin
+APPNAME=google
+
+curl -X POST -b cookies http://localhost:9763/store/site/blocks/subscription/subscription-add/ajax/subscription-add.jag -d "action=addAPISubscription&name=$API_NAME&version=$API_VERSION&provider=$PROVIDER&tier=Unlimited&applicationName=$APPNAME"
+
+
+
+

@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ~/wso2apim/cur/common-server/wso2esb-4.9.0/bin/
+sh wso2server.sh

@@ -1,0 +1,3 @@
+#!/bin/bash
+pathScripts=~/wso2apim/scripts
+ls $pathScripts --color
